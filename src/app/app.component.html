@@ -1,0 +1,246 @@
+<header>
+  <h3 class="title">
+    Реквизиты входящего документа
+  </h3>
+  <a href="add" class="btn-add-doc">Добавить документ</a>
+</header>
+<!--
+
+<main>
+  <table>
+    <thead>
+      <tr>
+        <th>Рег. №</th>
+        <th>Дата рег.</th>
+        <th>№ исх.док</th>
+        <th>Дата исх.док-та</th>
+        <th>Форма доставки</th>
+        <th>Корреспондент</th>
+        <th>Тема</th>
+        <th>Описание</th>
+        <th>Срок исполнения</th>
+        <th>Доступ</th>
+        <th>Контроль</th>
+        <th>Файл</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>1</td>
+        <td>2</td>
+        <td>
+
+        </td>
+        <td>
+          <button class="btn-update">
+            Изменить
+          </button>
+          <button class="btn-delete">
+            Удалить
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+
+
+  <!--<form>
+   <mat-grid-list cols="3" rowHeight="150px">
+      <mat-grid-tile>
+        <mat-form-field class="block">
+          <mat-label [formControl]="optionControl" style="font-size: 12px;">
+            Регистрационный номер
+          </mat-label>
+          <input matInput required>
+          @if(optionControl.hasError('required')){
+          <mat-error>Заполните поле</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="block">
+          <mat-label>
+            Дата регистрации
+          </mat-label>
+          <input matInput type="date" required>
+        </mat-form-field>
+
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="block">
+          <mat-label style="font-size: 12px;">
+            Номер исходного документа
+          </mat-label>
+          <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="block">
+          <mat-label>
+            Дата исходного документа
+          </mat-label>
+          <input matInput type="date">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="my-dropdown">
+          <mat-label class="title">Форма доставки</mat-label>
+          <mat-select>
+            @for(option of options; track option){
+            <mat-option [value]="option.value">{{option.viewValue}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="my-dropdown">
+          <mat-label class="title">Корреспондент</mat-label>
+          <mat-select [formControl]="optionControl" required>
+            @for(item of items; track item){
+            <mat-option [value]="item.value">{{ item.viewValue }}</mat-option>
+            }
+          </mat-select>
+          @if(optionControl.hasError('required')){
+          <mat-error>Заполните поле</mat-error>
+          }
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="theme">
+          <mat-label>Тема</mat-label>
+          <textarea matInput required maxlength="100" rows="4" cols="100" placeholder="Введите тему"></textarea>
+          @if(optionControl.hasError('required')){
+          <mat-error>Заполните поле</mat-error>}
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="description">
+          <mat-label>Описание</mat-label>
+          <textarea matInput maxlength="1000" rows="4" cols="100" placeholder="Введите описание"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="block">
+          <mat-label>
+            Сроки исполнения
+          </mat-label>
+          <input matInput type="date">
+        </mat-form-field>
+
+      </mat-grid-tile>
+      <mat-grid-tile class="accessS">
+        <mat-label>Доступ</mat-label>
+        <mat-radio-group aria-label="Доступ">
+          <mat-radio-button value="1">Да</mat-radio-button>
+          <mat-radio-button value="2">Нет</mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-label>Контроль</mat-label>
+        <mat-radio-group aria-label="Контроль">
+          <mat-radio-button value="1">Да</mat-radio-button>
+          <mat-radio-button value="2">Нет</mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <input type="file" class="file" (change)="onFileChange($event)">
+          <p class="err">{{errorMessage}}</p>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>-->
+
+
+
+<!--<div class="header">
+      <mat-form-field class="block">
+        <mat-label>
+          Регистрационный номер
+        </mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field  class="block">
+        <mat-label>
+          Дата регистрации
+        </mat-label>
+        <input matInput type="date">
+      </mat-form-field>
+
+      <mat-form-field  class="block">
+        <mat-label>
+          Номер исходного документа
+        </mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field  class="block">
+        <mat-label>
+          Дата исходного документа
+        </mat-label>
+        <input matInput type="date">
+      </mat-form-field>
+       
+    </div>
+
+    <div class="body">
+      <mat-form-field class="my-dropdown">
+        <mat-label class="title">Форма доставки</mat-label>
+        <mat-select [formControl]="optionControl" required>
+          @for(option of options; track option){
+          <mat-option [value]="option.value">{{option.viewValue}}</mat-option>
+          }
+        </mat-select>
+        @if(optionControl.hasError('required')){
+        <mat-error>Заполните поле</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="my-dropdown">
+        <mat-label class="title">Корреспондент</mat-label>
+        <mat-select>
+          @for(item of items; track item){
+          <mat-option [value]="item.value">{{ item.viewValue }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Тема</mat-label>
+        <textarea matInput required>Введите тему</textarea>
+        @if(optionControl.hasError('required')){
+        <mat-error>Заполните поле</mat-error>}
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Описание</mat-label>
+        <textarea matInput>Введите описание</textarea>
+      </mat-form-field>
+
+      <input placeholder="Срок выполнения" type="date" class="">
+    </div>
+    <div>
+      <input placeholder="Доступ" type="radio" class="">
+      <input placeholder="Контроль" type="radio" class="">
+    </div>
+    <div>
+      <input type="file" class="file" (change)="onFileChange($event)">
+      <p class="err">{{errorMessage}}</p>
+    </div>-->
+<!--<div class="btn-block">
+      <button class="btn">Сохранить</button>
+      <button class="btn">Печать</button>
+      <button class="btn">Закрыть</button>
+    </div>
+
+
+  </form>
+</main>-->
+<router-outlet></router-outlet>

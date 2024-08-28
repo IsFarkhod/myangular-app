@@ -1,0 +1,50 @@
+.btn-update,
+.btn-delete {
+    margin: 8px 12px;
+    padding: 8px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-update {
+    background-color: yellow;
+    text-decoration: none;
+    color: black;
+}
+
+.btn-delete {
+    background-color: red;
+}
+
+main {
+    min-width: 1200px;
+    height: auto;
+    margin: 25px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+tr {
+    background-color: #eaeaeabe;
+}
+
+/*
+input {
+    width: 155px;
+    height: 50px;
+    margin: 0 15px;
+}
+*/
+form {
+    width: 100%;
+    height: 100%;
+}

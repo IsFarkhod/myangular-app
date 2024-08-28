@@ -1,0 +1,52 @@
+.err {
+    color: red;
+}
+
+.add-doc {
+    min-width: 1250px;
+    height: 100%;
+    margin: 35px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-form {
+    width: auto;
+    height: 100%;
+    float: left;
+}
+
+.theme,
+.description,
+.block,
+.my-dropdown {
+    margin: 0 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+.btn-block {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.btn-add {
+    width: 125px;
+    height: 55px;
+    background-color: rgb(41, 148, 41);
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    width: 225px;
+    height: 35px;
+    border: 0;
+    padding: 5px;
+}

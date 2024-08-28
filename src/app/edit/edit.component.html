@@ -1,0 +1,104 @@
+<section class="add-doc">
+    <form class="add-form">
+        <div>
+            <mat-form-field class="block">
+                <mat-label style="font-size: 12px;">
+                    Регистрационный номер
+                </mat-label>
+                <input [formControl]="numberReg" matInput id="numberReg">
+                @if (numberReg.hasError('required')) {
+                <mat-error>Заполните поле</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="block">
+                <mat-label>
+                    Дата регистрации
+                </mat-label>
+                <input matInput type="date" id="dataReg" [formControl]="dateReg">
+                @if (dateReg.hasError('required')) {
+                <mat-error>Заполните поле</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field class="block">
+                <mat-label style="font-size: 12px;">
+                    Номер исходного документа
+                </mat-label>
+                <input matInput id="numberDoc">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="block">
+                <mat-label>
+                    Дата исходного документа
+                </mat-label>
+                <input matInput type="date" id="dataDoc">
+            </mat-form-field>
+
+            <mat-form-field class="my-dropdown">
+                <mat-label class="title">Форма доставки</mat-label>
+                <mat-select>
+                    @for(option of options; track option){
+                    <mat-option [value]="option.value" id="formOfDelivery">{{option.viewValue}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="my-dropdown">
+                <mat-label class="title">Корреспондент</mat-label>
+                <mat-select [formControl]="optionControl" required>
+                    @for(item of items; track item){
+                    <mat-option [value]="item.value" id="correspondent">{{ item.viewValue }}</mat-option>
+                    }
+                </mat-select>
+                @if(optionControl.hasError('required')){
+                <mat-error>Заполните поле</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+
+        <mat-form-field class="theme">
+            <mat-label>Тема</mat-label>
+            <textarea matInput maxlength="100" rows="4" cols="100" placeholder="Введите тему" id="theme"
+                [formControl]="themeReg"></textarea>
+            @if (themeReg.hasError('required')) {
+            <mat-error>Заполните поле</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="description">
+            <mat-label>Описание</mat-label>
+            <textarea matInput maxlength="1000" rows="4" cols="100" placeholder="Введите описание"
+                id="description"></textarea>
+        </mat-form-field>
+        <mat-form-field class="block">
+            <mat-label>
+                Сроки исполнения
+            </mat-label>
+            <input matInput type="date" id="deadline">
+        </mat-form-field>
+
+        <div>
+            <mat-label>Доступ</mat-label>
+            <mat-radio-group aria-label="Доступ">
+                <mat-radio-button value="1" id="access-y">Да</mat-radio-button>
+                <mat-radio-button value="2" id="access-n">Нет</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div>
+            <mat-label>Контроль</mat-label>
+            <mat-radio-group aria-label="Контроль" id="control">
+                <mat-radio-button value="1" id="control-y">Да</mat-radio-button>
+                <mat-radio-button value="2" id="control-n">Нет</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div>
+            <input type="file" class="file" (change)="onFileChange($event)" id="file">
+            <p class="err">{{errorMessage}}</p>
+        </div>
+        <div class="btn-block">
+            <button type="submit" id="addBtn" class="btn-add">Изменить</button>
+        </div>
+
+    </form>
+
+</section>
