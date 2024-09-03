@@ -1,4 +1,139 @@
-<main>
+<header>
+  <h3 class="title">
+    Реквизиты входящего документа
+  </h3>
+  <a href="add" class="btn-add-doc">Добавить документ</a>
+</header>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+    <!-- Name Column
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id">
+        id
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container> -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="numberReg">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by numberReg">
+        Рег. №
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.numberReg}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="dateReg">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by dateReg">
+        Дата рег.
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateReg}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="numberDoc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by numberDoc">
+        № исх.док
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.numberDoc}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="dateDoc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by dateDoc">
+        Дата исх.док-та
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateDoc}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="formOfDelivery">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by formOfDelivery">
+        Форма доставки
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.formOfDelivery}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="correspondent">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by correspondent">
+        Корреспондент
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.correspondent}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="theme">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by theme">
+        Тема
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.theme}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
+        Описание
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="deadline">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by deadline">
+        Срок исполнения
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.deadline}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="access">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by access">
+        Доступ
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.access}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="control">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by control">
+        Контроль
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.control}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="file">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by file">
+        Файл
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.file}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by actions">
+        Дейтсвия
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <a href="/edit" class="btn-update">
+          Изменить
+        </a>
+        <a class="btn-delete">
+          Удалить
+        </a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+<!--<main>
   <table>
     <thead>
       <tr>
@@ -140,11 +275,11 @@
       </tr>
     </tbody>
 
-  </table>
+  </table>-->
 
 
 
-  <!--<form>
+<!--<form>
      <mat-grid-list cols="3" rowHeight="150px">
         <mat-grid-tile>
           <mat-form-field class="block">
@@ -248,7 +383,7 @@
 
 
 
-  <!--<div class="header">
+<!--<div class="header">
         <mat-form-field class="block">
           <mat-label>
             Регистрационный номер
@@ -322,10 +457,10 @@
         <input type="file" class="file" (change)="onFileChange($event)">
         <p class="err">{{errorMessage}}</p>
       </div>-->
-  <!--<div class="btn-block">
+<!--<div class="btn-block">
         <button class="btn">Сохранить</button>
         <button class="btn">Печать</button>
         <button class="btn">Закрыть</button>
       </div>
-    </form>-->
-</main>
+    </form>
+</main>-->

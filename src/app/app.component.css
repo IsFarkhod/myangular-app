@@ -26,22 +26,6 @@ header {
     cursor: pointer;
 }
 
-.btn-update,
-.btn-delete {
-    margin: 8px 12px;
-    padding: 8px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-update {
-    background-color: yellow;
-}
-
-.btn-delete {
-    background-color: red;
-}
 
 main {
     min-width: 1200px;

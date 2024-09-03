@@ -1,81 +1,116 @@
+<header>
+    <h3 class="title">
+        Реквизиты входящего документа
+    </h3>
+    <a class="add-btn-back" href="/">
+        Просмотреть список документов
+    </a>
+</header>
 <section class="add-doc">
     <form class="add-form">
         <div>
-            <mat-form-field class="block">
-                <mat-label style="font-size: 12px;">
+            <div class="card">
+                <p class="title">Регистрационный номер*: </p>
+                <mat-form-field class="block">
+                    <!--<mat-label style="font-size: 12px;">
                     Регистрационный номер
-                </mat-label>
-                <input [formControl]="numberReg" matInput id="numberReg">
-                @if (numberReg.hasError('required')) {
-                <mat-error>Заполните поле</mat-error>
-                }
-            </mat-form-field>
+                </mat-label>-->
+                    <input [formControl]="numberReg" matInput id="numberReg">
+                    @if (numberReg.hasError('required')) {
+                    <mat-error>Заполните поле</mat-error>
+                    }
+                </mat-form-field>
+            </div>
 
-            <mat-form-field class="block">
-                <mat-label>
-                    Дата регистрации
-                </mat-label>
-                <input matInput type="date" id="dataReg" [formControl]="dateReg">
-                @if (dateReg.hasError('required')) {
-                <mat-error>Заполните поле</mat-error>
-                }
-            </mat-form-field>
-            <mat-form-field class="block">
-                <mat-label style="font-size: 12px;">
-                    Номер исходного документа
-                </mat-label>
-                <input matInput id="numberDoc">
-            </mat-form-field>
+            <div class="card">
+                <p class="title">Дата регистрации*: </p>
+                <mat-form-field class="block">
+                    <!-- <mat-label>
+                        Дата регистрации
+                    </mat-label>-->
+                    <input matInput type="date" id="dataReg" [formControl]="dateReg">
+                    @if (dateReg.hasError('required')) {
+                    <mat-error>Заполните поле</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="card">
+                <p class="title"> Номер исходного документа: </p>
+                <mat-form-field class="block">
+                    <!--<mat-label style="font-size: 12px;">
+                        Номер исходного документа
+                    </mat-label>-->
+                    <input matInput id="numberDoc">
+                </mat-form-field>
+            </div>
         </div>
         <div>
-            <mat-form-field class="block">
-                <mat-label>
+            <div class="card">
+                <p class="title">Дата исходного документа</p>
+                <mat-form-field class="block">
+                    <!--<mat-label>
                     Дата исходного документа
-                </mat-label>
-                <input matInput type="date" id="dataDoc">
-            </mat-form-field>
+                </mat-label>-->
+                    <input matInput type="date" id="dataDoc">
+                </mat-form-field>
+            </div>
 
-            <mat-form-field class="my-dropdown">
-                <mat-label class="title">Форма доставки</mat-label>
-                <mat-select>
-                    @for(option of options; track option){
-                    <mat-option [value]="option.value" id="formOfDelivery">{{option.viewValue}}</mat-option>
+            <div class="card">
+                <p class="title">Форма доставки</p>
+                <mat-form-field class="my-dropdown">
+                    <!--<mat-label class="title"></mat-label>-->
+                    <mat-select>
+                        @for(option of options; track option){
+                        <mat-option [value]="option.value" id="formOfDelivery">{{option.viewValue}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="card">
+                <p class="title">Корреспондент*</p>
+                <mat-form-field class="my-dropdown">
+                    <!--<mat-label class="title"></mat-label>-->
+                    <mat-select [formControl]="optionControl" required>
+                        @for(item of items; track item){
+                        <mat-option [value]="item.value" id="correspondent">{{ item.viewValue }}</mat-option>
+                        }
+                    </mat-select>
+                    @if(optionControl.hasError('required')){
+                    <mat-error>Заполните поле</mat-error>
                     }
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="my-dropdown">
-                <mat-label class="title">Корреспондент</mat-label>
-                <mat-select [formControl]="optionControl" required>
-                    @for(item of items; track item){
-                    <mat-option [value]="item.value" id="correspondent">{{ item.viewValue }}</mat-option>
-                    }
-                </mat-select>
-                @if(optionControl.hasError('required')){
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <p class="title">Тема*</p>
+            <mat-form-field class="theme">
+                <!--<mat-label></mat-label>-->
+                <textarea matInput maxlength="100" rows="4" cols="100" placeholder="Введите тему" id="theme"
+                    [formControl]="themeReg"></textarea>
+                @if (themeReg.hasError('required')) {
                 <mat-error>Заполните поле</mat-error>
                 }
             </mat-form-field>
         </div>
-
-
-        <mat-form-field class="theme">
-            <mat-label>Тема</mat-label>
-            <textarea matInput maxlength="100" rows="4" cols="100" placeholder="Введите тему" id="theme"
-                [formControl]="themeReg"></textarea>
-            @if (themeReg.hasError('required')) {
-            <mat-error>Заполните поле</mat-error>
-            }
-        </mat-form-field>
-        <mat-form-field class="description">
-            <mat-label>Описание</mat-label>
-            <textarea matInput maxlength="1000" rows="4" cols="100" placeholder="Введите описание"
-                id="description"></textarea>
-        </mat-form-field>
-        <mat-form-field class="block">
-            <mat-label>
-                Сроки исполнения
-            </mat-label>
-            <input matInput type="date" id="deadline">
-        </mat-form-field>
+        <div class="card">
+            <p class="title">Описание</p>
+            <mat-form-field class="description">
+                <!--<mat-label>Описание</mat-label>-->
+                <textarea matInput maxlength="1000" rows="4" cols="100" placeholder="Введите описание"
+                    id="description"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="card">
+            <p class="title">Сроки исполнения</p>
+            <mat-form-field class="block">
+                <!--<mat-label>
+                    Сроки исполнения
+                </mat-label>-->
+                <input matInput type="date" id="deadline">
+            </mat-form-field>
+        </div>
 
         <div>
             <mat-label>Доступ</mat-label>

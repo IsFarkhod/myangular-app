@@ -1,24 +1,60 @@
+header {
+    width: auto;
+    height: 80px;
+    padding: 0 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #405A77;
+    color: #fff;
+}
+
+table {
+    width: auto;
+}
+
+.btn-add-doc {
+    width: 175px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    background-color: rgb(74, 173, 74);
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
 .btn-update,
 .btn-delete {
-    margin: 8px 12px;
+    margin: 8px 0;
     padding: 8px;
     outline: none;
     border: none;
     cursor: pointer;
+    display: block;
+    text-align: center;
 }
 
 .btn-update {
+    width: 145px;
     background-color: yellow;
     text-decoration: none;
     color: black;
 }
 
 .btn-delete {
+    width: 145px;
     background-color: red;
 }
 
 main {
-    min-width: 1200px;
+    width: 1200px;
     height: auto;
     margin: 25px 35px;
     display: flex;
@@ -35,6 +71,12 @@ table {
 
 tr {
     background-color: #eaeaeabe;
+    margin: 0;
+    padding: 0;
+}
+
+td {
+    padding: 8px;
 }
 
 /*
