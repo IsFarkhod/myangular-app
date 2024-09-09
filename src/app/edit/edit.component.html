@@ -8,68 +8,74 @@
 </header>
 <section class="add-doc">
     <form class="add-form">
-        <div>
-            <div class="card">
-                <p class="title">Регистрационный номер*: </p>
-                <mat-form-field class="block">
-                    <!--<mat-label style="font-size: 12px;">
-                    Регистрационный номер
-                </mat-label>-->
+        <mat-grid-list cols="1" rowHeight="100px">
+            <mat-grid-tile>
+                <p class="title">Тема*</p>
+                <mat-form-field class="add-textarea">
+                    <mat-label></mat-label>
+                    <textarea matInput maxlength="100" rows="4" cols="100" placeholder="Введите тему" id="theme"
+                        [formControl]="themeReg"></textarea>
+                    @if (themeReg.hasError('required')) {
+                    <mat-error>Заполните поле</mat-error>
+                    }
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="4" rowHeight="100px">
+            <mat-grid-tile>
+                <div class="title-block">
+                    <p class="title">Регистрационный номер*: </p>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="my-block">
                     <input [formControl]="numberReg" matInput id="numberReg">
                     @if (numberReg.hasError('required')) {
                     <mat-error>Заполните поле</mat-error>
                     }
                 </mat-form-field>
-            </div>
-
-            <div class="card">
-                <p class="title">Дата регистрации*: </p>
-                <mat-form-field class="block">
-                    <!-- <mat-label>
-                        Дата регистрации
-                    </mat-label>-->
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div class="title-block">
+                    <p class="title">Дата регистрации*: </p>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="my-block">
                     <input matInput type="date" id="dataReg" [formControl]="dateReg">
                     @if (dateReg.hasError('required')) {
                     <mat-error>Заполните поле</mat-error>
                     }
                 </mat-form-field>
-            </div>
-            <div class="card">
-                <p class="title"> Номер исходного документа: </p>
-                <mat-form-field class="block">
-                    <!--<mat-label style="font-size: 12px;">
-                        Номер исходного документа
-                    </mat-label>-->
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="4" rowHeight="100px">
+            <mat-grid-tile>
+                <div class="title-block">
+                    <p class="title"> Номер исходного документа: </p>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="my-block">
                     <input matInput id="numberDoc">
                 </mat-form-field>
-            </div>
-        </div>
-        <div>
-            <div class="card">
-                <p class="title">Дата исходного документа</p>
-                <mat-form-field class="block">
-                    <!--<mat-label>
-                    Дата исходного документа
-                </mat-label>-->
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div class="title-block">
+                    <p class="title">Дата исходного документа</p>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="my-block">
                     <input matInput type="date" id="dataDoc">
                 </mat-form-field>
-            </div>
-
-            <div class="card">
-                <p class="title">Форма доставки</p>
-                <mat-form-field class="my-dropdown">
-                    <!--<mat-label class="title"></mat-label>-->
-                    <mat-select>
-                        @for(option of options; track option){
-                        <mat-option [value]="option.value" id="formOfDelivery">{{option.viewValue}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="card">
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="1" rowHeight="100px">
+            <mat-grid-tile>
                 <p class="title">Корреспондент*</p>
-                <mat-form-field class="my-dropdown">
-                    <!--<mat-label class="title"></mat-label>-->
+                <mat-form-field class="dropdown-correspondent">
                     <mat-select [formControl]="optionControl" required>
                         @for(item of items; track item){
                         <mat-option [value]="item.value" id="correspondent">{{ item.viewValue }}</mat-option>
@@ -79,57 +85,203 @@
                     <mat-error>Заполните поле</mat-error>
                     }
                 </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="4" rowHeight="100px">
+            <mat-grid-tile>
+                <div class="title-block">
+                    <p class="title">Форма доставки</p>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="my-dropdown">
+                    <mat-select>
+                        @for(option of options; track option){
+                        <mat-option [value]="option.value" id="formOfDelivery">{{option.viewValue}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div class="title-block">
+                    <p class="title">Сроки исполнения</p>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="my-block">
+                    <input matInput type="date" id="deadline">
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="1" rowHeight="100px">
+            <mat-grid-tile>
+                <p class="title">Описание</p>
+                <mat-form-field class="description">
+                    <textarea matInput maxlength="1000" rows="4" cols="100" placeholder="Введите описание"
+                        id="description"></textarea>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="4" rowHeight="100px">
+            <mat-grid-tile>
+                <div class="title-block">
+                    <p class="title">Доступ</p>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-radio-group aria-label="Доступ">
+                    <mat-radio-button value="1" id="access-y">Да</mat-radio-button>
+                    <mat-radio-button value="2" id="access-n">Нет</mat-radio-button>
+                </mat-radio-group>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div class="title-block">
+                    <p class="title">Контроль</p>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-radio-group aria-label="Контроль" id="control">
+                    <mat-radio-button value="1" id="control-y">Да</mat-radio-button>
+                    <mat-radio-button value="2" id="control-n">Нет</mat-radio-button>
+                </mat-radio-group>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <!--<div>
+            <div class="card">
+                <p class="title">Тема*</p>
+                <mat-form-field class="add-textarea">
+                    <mat-label></mat-label>
+                    <textarea matInput maxlength="100" rows="4" cols="100" placeholder="Введите тему" id="theme"
+                        [formControl]="themeReg"></textarea>
+                    @if (themeReg.hasError('required')) {
+                    <mat-error>Заполните поле</mat-error>
+                    }
+                </mat-form-field>
             </div>
+            <div class="card">
+                <p class="title">Регистрационный номер*: </p>
+                <mat-form-field class="my-block">
+                    <input [formControl]="numberReg" matInput id="numberReg">
+                    @if (numberReg.hasError('required')) {
+                    <mat-error>Заполните поле</mat-error>
+                    }
+                </mat-form-field>
 
+                <p class="title">Дата регистрации*: </p>
+                <mat-form-field class="my-block">
+                    <input matInput type="date" id="dataReg" [formControl]="dateReg">
+                    @if (dateReg.hasError('required')) {
+                    <mat-error>Заполните поле</mat-error>
+                    }
+                </mat-form-field>
+            </div>-->
+
+        <!--<div class="card">
+                <p class="title">Дата регистрации*: </p>
+                <mat-form-field class="block">
+                     <mat-label>
+                        Дата регистрации
+                    </mat-label>
+                    <input matInput type="date" id="dataReg" [formControl]="dateReg">
+                    @if (dateReg.hasError('required')) {
+                    <mat-error>Заполните поле</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="card">
+                <p class="title"> Номер исходного документа: </p>
+                <mat-form-field class="my-block">
+                    <input matInput id="numberDoc">
+                </mat-form-field>
+
+                <p class="title">Дата исходного документа</p>
+                <mat-form-field class="my-block">
+                    <input matInput type="date" id="dataDoc">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="card">
+            <p class="title">Корреспондент*</p>
+            <mat-form-field class="dropdown-correspondent">
+                <mat-select [formControl]="optionControl" required>
+                    @for(item of items; track item){
+                    <mat-option [value]="item.value" id="correspondent">{{ item.viewValue }}</mat-option>
+                    }
+                </mat-select>
+                @if(optionControl.hasError('required')){
+                <mat-error>Заполните поле</mat-error>
+                }
+            </mat-form-field>
+        </div>
+        <div>
+            <div class="card">
+                <div class="block">
+                    <p class="title">Форма доставки</p>
+                    <mat-form-field class="my-dropdown">
+                        <mat-select>
+                            @for(option of options; track option){
+                            <mat-option [value]="option.value" id="formOfDelivery">{{option.viewValue}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="block">
+                    <p class="title">Сроки исполнения</p>
+                    <mat-form-field class="my-block">
+                        <input matInput type="date" id="deadline">
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
 
         <div class="card">
             <p class="title">Тема*</p>
             <mat-form-field class="theme">
-                <!--<mat-label></mat-label>-->
+                <mat-label></mat-label>
                 <textarea matInput maxlength="100" rows="4" cols="100" placeholder="Введите тему" id="theme"
                     [formControl]="themeReg"></textarea>
                 @if (themeReg.hasError('required')) {
                 <mat-error>Заполните поле</mat-error>
                 }
             </mat-form-field>
-        </div>
-        <div class="card">
+        </div>-->
+        <!--<div class="card">
             <p class="title">Описание</p>
             <mat-form-field class="description">
-                <!--<mat-label>Описание</mat-label>-->
+                <mat-label>Описание</mat-label>
                 <textarea matInput maxlength="1000" rows="4" cols="100" placeholder="Введите описание"
                     id="description"></textarea>
             </mat-form-field>
         </div>
-        <div class="card">
-            <p class="title">Сроки исполнения</p>
-            <mat-form-field class="block">
-                <!--<mat-label>
-                    Сроки исполнения
-                </mat-label>-->
-                <input matInput type="date" id="deadline">
-            </mat-form-field>
-        </div>
 
-        <div>
-            <mat-label>Доступ</mat-label>
-            <mat-radio-group aria-label="Доступ">
-                <mat-radio-button value="1" id="access-y">Да</mat-radio-button>
-                <mat-radio-button value="2" id="access-n">Нет</mat-radio-button>
-            </mat-radio-group>
+
+        <div class="rbtn-block">
+            <div class="rbtn-access">
+                <mat-label>Доступ</mat-label>
+                <mat-radio-group aria-label="Доступ">
+                    <mat-radio-button value="1" id="access-y">Да</mat-radio-button>
+                    <mat-radio-button value="2" id="access-n">Нет</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <div class="rbtn-control">
+                <mat-label>Контроль</mat-label>
+                <mat-radio-group aria-label="Контроль" id="control">
+                    <mat-radio-button value="1" id="control-y">Да</mat-radio-button>
+                    <mat-radio-button value="2" id="control-n">Нет</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
         </div>
-        <div>
-            <mat-label>Контроль</mat-label>
-            <mat-radio-group aria-label="Контроль" id="control">
-                <mat-radio-button value="1" id="control-y">Да</mat-radio-button>
-                <mat-radio-button value="2" id="control-n">Нет</mat-radio-button>
-            </mat-radio-group>
-        </div>
-        <div>
-            <input type="file" class="file" (change)="onFileChange($event)" id="file">
-            <p class="err">{{errorMessage}}</p>
-        </div>
+        <div class="btn-file">
+            <mat-label>Файл</mat-label>
+            <div>
+                <input type="file" class="file" (change)="onFileChange($event)" id="file">
+                <p class="err">{{errorMessage}}</p>
+            </div>
+
+        </div>-->
         <div class="btn-block">
             <button type="submit" id="addBtn" class="btn-add">Изменить</button>
         </div>
