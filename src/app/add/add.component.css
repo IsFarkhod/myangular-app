@@ -20,9 +20,9 @@ header {
 }
 
 .add-doc {
-    min-width: 1250px;
+    min-width: 1050px;
     height: 100%;
-    margin: 35px 25px;
+    margin: 35px 75px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,7 +30,7 @@ header {
 }
 
 .add-form {
-    width: auto;
+    width: 100%;
     height: 100%;
     float: left;
 }
@@ -40,6 +40,11 @@ header {
 .block,
 .my-dropdown {
     margin: 0 15px;
+}
+
+.my-dropdown {
+    width: 300px;
+    height: 70px;
 }
 
 textarea {
@@ -52,10 +57,11 @@ textarea {
     text-align: center;
 }
 
-.block {
-    width: 270px;
+.my-block {
+    width: 300px;
     height: 70px;
     padding: 0;
+    margin: 0;
 }
 
 .btn-add {
@@ -72,17 +78,85 @@ input {
     padding: 0px;
 }
 
-input[type="file"] {
-    width: 225px;
-    height: 35px;
-    border: 0;
-    padding: 5px;
-}
-
 .card {
-    width: auto;
+    width: 100%;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.theme {
+    width: 525px;
+    height: 70px;
+}
+
+.block {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.add-textarea {
+    width: 100%;
+    height: 70px;
+}
+
+.dropdown-block {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.description {
+    width: 100%;
+    height: 70px;
+}
+
+.title {
+    margin: 0 15px
+}
+
+.rbtn-block {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rbtn-access,
+.rbtn-control {
+    width: 100%;
+    margin: 0 15px;
+}
+
+.btn-file {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+
+input[type="file"] {
+    width: 100%;
+    height: 35px;
+    border: 0;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.dropdown-correspondent {
+    width: 100%;
+}
+
+.title-block {
+    width: 100%;
 }

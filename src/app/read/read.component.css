@@ -5,6 +5,10 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
 
     background-color: #405A77;
     color: #fff;
@@ -89,4 +93,43 @@ input {
 form {
     width: 100%;
     height: 100%;
+}
+
+.icon-block {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin: 8px 14px;
+}
+
+.icon-card {
+    width: 25px;
+    height: 25px;
+    margin: 8px;
+    padding: 6px;
+    background-color: #405A77;
+    color: #fff;
+    border-radius: 50%;
+}
+
+a {
+    color: #fff;
+}
+
+.btn-delete {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    position: absolute;
+}
+
+.selected {
+    color: #fff;
+    background-color: #405A77;
+    /* Цвет выделенной строки */
 }

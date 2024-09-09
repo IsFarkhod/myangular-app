@@ -1,8 +1,10 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 export interface PeriodicElement {
   // id: number;
@@ -18,6 +20,7 @@ export interface PeriodicElement {
   access: string;
   control: string;
   file: string;
+  showDelete?: boolean;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -147,14 +150,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-read',
   standalone: true,
-  imports: [MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule],
   templateUrl: './read.component.html',
-  styleUrl: './read.component.css'
+  styleUrl: './read.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReadComponent implements AfterViewInit {
   private _liveAnnouncer = inject(LiveAnnouncer);
 
-  displayedColumns: string[] = [/*'id',*/ 'numberReg', 'dateReg', 'numberDoc', 'dateDoc', 'formOfDelivery', 'correspondent', 'theme', 'description', 'deadline', 'access', 'control', 'file', 'actions'];
+  displayedColumns: string[] = [/*'id',*/ 'numberReg', 'dateReg', 'numberDoc', 'dateDoc', 'formOfDelivery', 'correspondent', 'theme', 'description', 'deadline', 'access', 'control', 'file', /*'actions'*/];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -178,5 +182,64 @@ export class ReadComponent implements AfterViewInit {
       this._liveAnnouncer.announce('Сортировка очищена');
     }
   }
+  toggleDeleteButton(element: PeriodicElement): void {
+    element.showDelete = !element.showDelete; // Переключить видимость кнопки
+  }
 
+  deleteItem(element: PeriodicElement): void {
+    // Logic to delete the item from the data source
+    console.log('Deleting item:', element);
+    // Example: Remove the item from the data source
+    this.dataSource.data = this.dataSource.data.filter(item => item !== element);
+  }
+
+  selectedRowIndex: number | null = null;
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'ArrowUp') {
+      this.moveUp();
+    } else if (event.key === 'ArrowDown') {
+      this.moveDown();
+    }
+  }
+
+  moveUp() {
+    if (this.selectedRowIndex !== null && this.selectedRowIndex > 0) {
+      this.selectedRowIndex--; // Перейти к предыдущей строке
+    } else if (this.selectedRowIndex === null) {
+      this.selectedRowIndex = 0; // Если ничего не выбрано, выберите первую строку
+    }
+  }
+
+  moveDown() {
+    if (this.selectedRowIndex === null) {
+      this.selectedRowIndex = 0; // Если ничего не выбрано, выберите первую строку
+    } else if (this.selectedRowIndex < this.dataSource.data.length - 1) {
+      this.selectedRowIndex++; // Перейти к следующей строке
+    }
+  }
+  /*@HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Home') {
+      this.selectFirstRow();
+    } else if (event.key === 'End') {
+      this.selectLastRow();
+    }
+  }
+
+  selectFirstRow() {
+    if (this.dataSource.data.length > 0) {
+      this.selectedRowIndex = 0; // Выбор первой строки
+    }
+  }
+
+  selectLastRow() {
+    if (this.dataSource.data.length > 0) {
+      this.selectedRowIndex = this.dataSource.data.length - 1; // Выбор последней строки
+    }
+  }*/
+
+  selectRow(index: number) {
+    this.selectedRowIndex = index; // Установить индекс выбранной строки
+  }
 }
