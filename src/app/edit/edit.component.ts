@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterOutlet } from '@angular/router';
-import { Router } from 'express';
-import { DataService } from '../../DataService';
+import { PeriodicElement } from '../read/read.component';
 
-export interface MyDocument {
+/*export interface MyDocument {
   numberReg: string,
-  dateReg: Date,
+  dateReg: string,
   numberDoc: string,
   dataDoc: string,
   formOfDelivery: string,
@@ -22,7 +20,7 @@ export interface MyDocument {
   access: string,
   control: string,
   myfile: string,
-};
+};*/
 
 interface Option {
   value: string,
@@ -41,51 +39,21 @@ interface Item {
     ReactiveFormsModule,
     MatInputModule,
     MatGridListModule,
-    MatRadioModule],
+    MatRadioModule,
+    ReactiveFormsModule],
   templateUrl: './edit.component.html',
   styleUrl: '../add/add.component.css'
 })
 export class EditComponent {
-  //options = ["Курьер", "Email", "Телефонограмма"];
-  //items = ["ЦБ", "ГНИ", "ТСЖ"];
   ext = ["PDF", "DOC", "DOCX"];
 
-  //documentForm: FormGroup;
+  selectedRow: PeriodicElement;
+  documentForm: FormGroup;
+  constructor(private fb: FormBuilder) {
 
-  /*constructor(
-    private formBuilder: FormBuilder,
-    private documentService: DataService
-  ) {
-    this.documentForm = this.formBuilder.group({
-      numberReg: ['', Validators.required] // Создание контроллера с обязательным полем
-    });
-    /*this.documentForm = new FormGroup({
-      numberFormControl: new FormControl('', [Validators.required]),
-      dateReg: new FormControl('', [Validators.required]),
-      numberDoc: new FormControl('', [Validators.required]),
-      dataDoc: new FormControl('', [Validators.required]),
-      formOfDelivery: new FormControl('', [Validators.required]),
-      correspondent: new FormControl('', [Validators.required]),
-      theme: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      deadline: new FormControl('', [Validators.required]),
-      access: new FormControl('', [Validators.required]),
-      control: new FormControl('', [Validators.required]),
-      myfile: new FormControl('', [Validators.required])
-    });
-  };*/
-  /*onSubmit(): void {
-    if (this.documentForm.valid) {
-      const document: MyDocument = this.documentForm.value;
-      this.documentService.saveDataToJson(document);
-      this.documentForm.reset();
-    }
   }
-  onSubmit() {
-    if (this.documentForm.valid) {
-      console.log(this.documentForm.value);
-    }
-  }*/
+
+
   errorMessage: string | null = null;
   myfile: File | null = null;
   maxFileSize = 1024 * 1024;
@@ -149,6 +117,9 @@ export class EditComponent {
     return isValidSize === isValidExtension;
   }
 
-  //emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-
+  onSubmit() {
+    if (this.documentForm.valid) {
+      console.log(this.documentForm.value);
+    }
+  }
 }

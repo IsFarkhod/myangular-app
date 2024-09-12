@@ -1,14 +1,18 @@
 header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.header-title {
     width: auto;
     height: 80px;
     padding: 0 75px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 10;
+    /**/
 
     background-color: #405A77;
     color: #fff;
@@ -16,6 +20,10 @@ header {
 
 table {
     width: auto;
+}
+
+a {
+    cursor: pointer;
 }
 
 .btn-add-doc {
@@ -100,7 +108,12 @@ form {
     height: auto;
     display: flex;
     align-items: center;
-    margin: 8px 14px;
+    padding: 8px 14px;
+    background-color: #fff;
+
+    /*position: fixed;
+    top: 0;
+    left: 0;*/
 }
 
 .icon-card {
@@ -130,6 +143,5 @@ a {
 
 .selected {
     color: #fff;
-    background-color: #405A77;
-    /* Цвет выделенной строки */
+    background-color: #405A77 !important;
 }

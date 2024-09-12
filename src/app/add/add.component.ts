@@ -5,9 +5,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterOutlet } from '@angular/router';
-import { Router } from 'express';
-import { DataService } from '../../DataService';
 
 export interface MyDocument {
   numberReg: string,
@@ -150,5 +147,13 @@ export class AddComponent {
   }
 
   //emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  /* moveToNext(currentField: HTMLInputElement, nextFieldId: string) {
+     if (currentField.value.length >= currentField.maxLength) {
+       const nextField = document.getElementById(nextFieldId) as HTMLInputElement;
+       if (nextField) {
+         nextField.focus()
+       }
+     }
+   }*/
 
 }

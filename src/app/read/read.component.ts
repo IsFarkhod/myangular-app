@@ -5,6 +5,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   // id: number;
@@ -21,6 +23,7 @@ export interface PeriodicElement {
   control: string;
   file: string;
   showDelete?: boolean;
+  isFocused?: boolean;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -156,10 +159,18 @@ const ELEMENT_DATA: PeriodicElement[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReadComponent implements AfterViewInit {
+  selectedRow: PeriodicElement;
   private _liveAnnouncer = inject(LiveAnnouncer);
 
   displayedColumns: string[] = [/*'id',*/ 'numberReg', 'dateReg', 'numberDoc', 'dateDoc', 'formOfDelivery', 'correspondent', 'theme', 'description', 'deadline', 'access', 'control', 'file', /*'actions'*/];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  pageSize = 5;
+  currentPage = 0;
+
+  constructor(private snackBar: MatSnackBar) {
+
+    // this.selectedRow = this.dataService.getSelectedRow();
+  }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort)
@@ -168,6 +179,7 @@ export class ReadComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.paginator.length = ELEMENT_DATA.length;
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -175,7 +187,6 @@ export class ReadComponent implements AfterViewInit {
   }
 
   announceSortChange(sortState: Sort) {
-
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Сортировка заканчивается на ${sortState.direction}`);
     } else {
@@ -192,10 +203,16 @@ export class ReadComponent implements AfterViewInit {
     // Example: Remove the item from the data source
     this.dataSource.data = this.dataSource.data.filter(item => item !== element);
   }
-
+  loadData() {
+    this.currentPage++;
+    const startIndex = this.currentPage * this.pageSize;
+    const newData = ELEMENT_DATA.slice(startIndex, startIndex + this.pageSize);
+    this.dataSource.data = [...this.dataSource.data, ...newData];
+  }
   selectedRowIndex: number | null = null;
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+
     if (event.key === 'ArrowUp') {
       this.moveUp();
     } else if (event.key === 'ArrowDown') {
@@ -216,30 +233,30 @@ export class ReadComponent implements AfterViewInit {
       this.selectedRowIndex = 0; // Если ничего не выбрано, выберите первую строку
     } else if (this.selectedRowIndex < this.dataSource.data.length - 1) {
       this.selectedRowIndex++; // Перейти к следующей строке
+    } else {
+      this.loadNextPage();
     }
   }
-  /*@HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Home') {
-      this.selectFirstRow();
-    } else if (event.key === 'End') {
-      this.selectLastRow();
-    }
-  }
-
-  selectFirstRow() {
-    if (this.dataSource.data.length > 0) {
-      this.selectedRowIndex = 0; // Выбор первой строки
-    }
-  }
-
-  selectLastRow() {
-    if (this.dataSource.data.length > 0) {
-      this.selectedRowIndex = this.dataSource.data.length - 1; // Выбор последней строки
-    }
-  }*/
-
-  selectRow(index: number) {
+  selectRow(index: number): void {
     this.selectedRowIndex = index; // Установить индекс выбранной строки
+  }
+
+  deleteElement() {
+    //alert("Вы уверены что хотите удалить данные?");
+
+    this.snackBar.open('Вы действительно хотите удалить данные?', 'Да', {
+      duration: 3000,
+    });
+  }
+
+  loadNextPage() {
+    if (this.paginator.hasNextPage()) {
+      this.paginator.nextPage();
+      this.selectedRowIndex = 0;
+    }
+  }
+
+  isSelected(row: PeriodicElement): boolean {
+    return this.selectedRowIndex === this.dataSource.data.indexOf(row);
   }
 }
