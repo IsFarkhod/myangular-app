@@ -30,7 +30,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by numberReg">
         Рег. №
       </th>
-      <td class="table-card" mat-cell *matCellDef="let element">
+      <td class="table-card" mat-cell *matCellDef="let element" (click)="editItem(element)">
         {{element.numberReg}}
       </td>
     </ng-container>

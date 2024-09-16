@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { PeriodicElement } from '../read/read.component';
+import { PeriodicElement } from '../element.model';
+import { isPlatformBrowser } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 /*export interface MyDocument {
   numberReg: string,
@@ -38,49 +40,64 @@ interface Item {
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatIconModule,
     MatGridListModule,
     MatRadioModule,
     ReactiveFormsModule],
   templateUrl: './edit.component.html',
-  styleUrl: '../add/add.component.css'
+  styleUrl: '../edit/edit.component.css'
 })
-export class EditComponent {
+export class EditComponent implements OnInit {
   ext = ["PDF", "DOC", "DOCX"];
 
   selectedRow: PeriodicElement;
   documentForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+  selectedRowIndex: number = 0;
 
+  constructor(private fb: FormBuilder, @Inject(PLATFORM_ID) private platformId: Object) {
+    this.documentForm = this.fb.group({
+      numberReg: [''],
+      dateReg: [''],
+      numberDoc: [''],
+      dateDoc: [''],
+      formOfDelivery: [''],
+      correspondent: [''],
+      theme: [''],
+      description: [''],
+      deadline: [''],
+      access: [''],
+      control: [''],
+      file: ['']
+    })
   }
-
 
   errorMessage: string | null = null;
   myfile: File | null = null;
   maxFileSize = 1024 * 1024;
   options: Option[] = [
     {
-      value: "Курьер-0",
+      value: "Курьер",
       viewValue: "Курьер"
     },
     {
-      value: "Email-1",
+      value: "Email",
       viewValue: "Email"
     },
     {
-      value: "Телефонограмма-2",
+      value: "Телефонограмма",
       viewValue: "Телефонограмма"
     }
   ];
   items: Item[] = [
     {
-      value: "ЦБ-0",
+      value: "ЦБ",
       viewValue: "ЦБ"
     }, {
-      value: "ГНИ-1",
+      value: "ГНИ",
       viewValue: "ГНИ"
     },
     {
-      value: "ТСЖ-2",
+      value: "ТСЖ",
       viewValue: "ТСЖ"
     }
   ];
@@ -107,6 +124,28 @@ export class EditComponent {
     }
   }
 
+  ngOnInit(): void {
+    const userData = localStorage.getItem("selectedRow");
+    if (userData) {
+      const user = JSON.parse(userData);
+      this.documentForm.patchValue(user); // Заполняем форму данными
+      this.selectedRowIndex = this.items.findIndex(item => item.value === user.value);
+    } else {
+      console.log("Данные не найдены, значения null")
+    }
+
+  }
+
+  handleChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (this.selectedRow) {
+      const key = target.name as keyof PeriodicElement;
+      if (key in this.selectedRow) {
+        //this.selectedRow[key] = target.value;
+        this.documentForm.get(key)?.setValue(target.value);
+      }
+    }
+  }
   isValidExtension(filename: string): boolean {
     const fileExt = filename.split('.').pop()?.toUpperCase();
     return this.ext.includes(fileExt || '');
@@ -120,6 +159,30 @@ export class EditComponent {
   onSubmit() {
     if (this.documentForm.valid) {
       console.log(this.documentForm.value);
+    }
+  }
+
+  previousRow() {
+    if (this.selectedRowIndex > 0) {
+      alert(this.selectedRowIndex)
+      this.selectedRowIndex--;
+      this.loadRowData();
+    }
+  }
+  nextRow() {
+    console.log('След строка', this.selectedRowIndex)
+    alert(this.selectedRowIndex)
+    if (this.selectedRowIndex !== null && this.selectedRowIndex < (this.items.length - 1)) {
+      this.selectedRowIndex++;
+      this.loadRowData();
+    }
+  }
+
+  loadRowData() {
+    if (this.selectedRowIndex !== null) {
+      alert(this.selectedRowIndex)
+      const currentRow = this.items[this.selectedRowIndex]; // Используйте items или другой источник данных
+      this.documentForm.patchValue(currentRow);
     }
   }
 }

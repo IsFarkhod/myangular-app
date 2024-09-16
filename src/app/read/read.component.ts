@@ -7,148 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { PeriodicElement } from '../element.model';
+import { DataService } from '../../data.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-export interface PeriodicElement {
-  // id: number;
-  numberReg: string;
-  dateReg: string;
-  numberDoc: string;
-  dateDoc: string;
-  formOfDelivery: string;
-  correspondent: string;
-  theme: string;
-  description: string;
-  deadline: string;
-  access: string;
-  control: string;
-  file: string;
-  showDelete?: boolean;
-  isFocused?: boolean;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    /*id: 1,*/ numberReg: "EGR190378", dateReg: "18.01.2024", numberDoc: "EDF147852", dateDoc: "21.01.2024", formOfDelivery: "Email", correspondent: "ГНИ", theme: "Тема документа1", description: "Описание документа1",
-    deadline: "15.02.2024", access: "Да", control: "Да", file: "path/to/file1"
-  },
-  {
-   /* id: 2,*/ numberReg: "OFE850147", dateReg: "16.08.2024", numberDoc: "OFV254789", dateDoc: "18.08.2024", formOfDelivery: "Курьер", correspondent: "ЦБ", theme: "Тема документа2", description: "Описание документа2",
-    deadline: "22.08.2024", access: "Нет", control: "Да", file: "path/to/file2"
-  },
-  {
-    /*id: 3,*/ numberReg: "ABE559406", dateReg: "12.05.2024", numberDoc: "RTY012477", dateDoc: "14.05.2024", formOfDelivery: "Телефонограмма", correspondent: "ТЦ", theme: "Тема документа3", description: "Описание документа3",
-    deadline: "15.06.2024", access: "Нет", control: "нет", file: "path/to/file3"
-  },
-  {
-    /*id: 4,*/ numberReg: "JOO017845", dateReg: "01.07.2024", numberDoc: "BNO963258", dateDoc: "05.07.2024", formOfDelivery: "Курьер", correspondent: "ГНИ", theme: "Тема документа4", description: "Описание документа4",
-    deadline: "11.08.2024", access: "Да", control: "Нет", file: "path/to/file4"
-  },
-  {
-  /*  id: 5,*/ numberReg: "FER965201", dateReg: "15.09.2024", numberDoc: "CVS753951", dateDoc: "17.09.2024", formOfDelivery: "Телефонограмма", correspondent: "ГНИ", theme: "Тема документа5", description: "Описание документа5",
-    deadline: "07.10.2024", access: "Да", control: "Да", file: "path/to/file5"
-  },
-  {
-    /*id: 6,*/ numberReg: "NMQ712573", dateReg: "13.03.2024", numberDoc: "KJI458963", dateDoc: "15.03.2024", formOfDelivery: "Email", correspondent: "ТЦ", theme: "Тема документа6", description: "Описание документа6",
-    deadline: "17.04.2024", access: "Нет", control: "Да", file: "path/to/file6"
-  },
-  {
-    /*id: 7,*/ numberReg: "SAQ250189", dateReg: "22.04.2024", numberDoc: "PLP742369", dateDoc: "24.04.2024", formOfDelivery: "Курьер", correspondent: "ЦБ", theme: "Тема документа7", description: "Описание документа7",
-    deadline: "28.09.2024", access: "Да", control: "Нет", file: "path/to/file7"
-  },
-  {
-    /*id: 8,*/ numberReg: "JOO017845", dateReg: "01.07.2024", numberDoc: "BNO963258", dateDoc: "05.07.2024", formOfDelivery: "Курьер", correspondent: "ГНИ", theme: "Тема документа4", description: "Описание документа4",
-    deadline: "11.08.2024", access: "Да", control: "Нет", file: "path/to/file4"
-  },
-  {
-    /*id: 9,*/ numberReg: "FER965201", dateReg: "15.09.2024", numberDoc: "CVS753951", dateDoc: "17.09.2024", formOfDelivery: "Телефонограмма", correspondent: "ГНИ", theme: "Тема документа5", description: "Описание документа5",
-    deadline: "07.10.2024", access: "Да", control: "Да", file: "path/to/file5"
-  },
-  {
-    /*id: 10,*/ numberReg: "NMQ712573", dateReg: "13.03.2024", numberDoc: "KJI458963", dateDoc: "15.03.2024", formOfDelivery: "Email", correspondent: "ТЦ", theme: "Тема документа6", description: "Описание документа6",
-    deadline: "17.04.2024", access: "Нет", control: "Да", file: "path/to/file6"
-  },
-  {
-    /*id: 11,*/ numberReg: "SAQ250189", dateReg: "22.04.2024", numberDoc: "PLP742369", dateDoc: "24.04.2024", formOfDelivery: "Курьер", correspondent: "ЦБ", theme: "Тема документа7", description: "Описание документа7",
-    deadline: "28.09.2024", access: "Да", control: "Нет", file: "path/to/file7"
-  },
-  {
-    /*id: 12,*/ numberReg: "JOO017845", dateReg: "01.07.2024", numberDoc: "BNO963258", dateDoc: "05.07.2024", formOfDelivery: "Курьер", correspondent: "ГНИ", theme: "Тема документа4", description: "Описание документа4",
-    deadline: "11.08.2024", access: "Да", control: "Нет", file: "path/to/file4"
-  },
-  {
-    /*id: 13,*/ numberReg: "FER965201", dateReg: "15.09.2024", numberDoc: "CVS753951", dateDoc: "17.09.2024", formOfDelivery: "Телефонограмма", correspondent: "ГНИ", theme: "Тема документа5", description: "Описание документа5",
-    deadline: "07.10.2024", access: "Да", control: "Да", file: "path/to/file5"
-  },
-  {
-    /*id: 14,*/ numberReg: "NMQ712573", dateReg: "13.03.2024", numberDoc: "KJI458963", dateDoc: "15.03.2024", formOfDelivery: "Email", correspondent: "ТЦ", theme: "Тема документа6", description: "Описание документа6",
-    deadline: "17.04.2024", access: "Нет", control: "Да", file: "path/to/file6"
-  },
-  {
-    /*id: 15,*/ numberReg: "SAQ250189", dateReg: "22.04.2024", numberDoc: "PLP742369", dateDoc: "24.04.2024", formOfDelivery: "Курьер", correspondent: "ЦБ", theme: "Тема документа7", description: "Описание документа7",
-    deadline: "28.09.2024", access: "Да", control: "Нет", file: "path/to/file7"
-  },
-  {
-    /*id: 16,*/ numberReg: "JOO017845", dateReg: "01.07.2024", numberDoc: "BNO963258", dateDoc: "05.07.2024", formOfDelivery: "Курьер", correspondent: "ГНИ", theme: "Тема документа4", description: "Описание документа4",
-    deadline: "11.08.2024", access: "Да", control: "Нет", file: "path/to/file4"
-  },
-  {
-    /*id: 17,*/ numberReg: "FER965201", dateReg: "15.09.2024", numberDoc: "CVS753951", dateDoc: "17.09.2024", formOfDelivery: "Телефонограмма", correspondent: "ГНИ", theme: "Тема документа5", description: "Описание документа5",
-    deadline: "07.10.2024", access: "Да", control: "Да", file: "path/to/file5"
-  },
-  {
-    /*id: 18,*/ numberReg: "NMQ712573", dateReg: "13.03.2024", numberDoc: "KJI458963", dateDoc: "15.03.2024", formOfDelivery: "Email", correspondent: "ТЦ", theme: "Тема документа6", description: "Описание документа6",
-    deadline: "17.04.2024", access: "Нет", control: "Да", file: "path/to/file6"
-  },
-  {
-    /*id: 19,*/ numberReg: "SAQ250189", dateReg: "22.04.2024", numberDoc: "PLP742369", dateDoc: "24.04.2024", formOfDelivery: "Курьер", correspondent: "ЦБ", theme: "Тема документа7", description: "Описание документа7",
-    deadline: "28.09.2024", access: "Да", control: "Нет", file: "path/to/file7"
-  },
-  {
-    /*id: 20,*/ numberReg: "JOO017845", dateReg: "01.07.2024", numberDoc: "BNO963258", dateDoc: "05.07.2024", formOfDelivery: "Курьер", correspondent: "ГНИ", theme: "Тема документа4", description: "Описание документа4",
-    deadline: "11.08.2024", access: "Да", control: "Нет", file: "path/to/file4"
-  },
-  {
-    /*id: 21,*/ numberReg: "FER965201", dateReg: "15.09.2024", numberDoc: "CVS753951", dateDoc: "17.09.2024", formOfDelivery: "Телефонограмма", correspondent: "ГНИ", theme: "Тема документа5", description: "Описание документа5",
-    deadline: "07.10.2024", access: "Да", control: "Да", file: "path/to/file5"
-  },
-  {
-    /*id: 22,*/ numberReg: "NMQ712573", dateReg: "13.03.2024", numberDoc: "KJI458963", dateDoc: "15.03.2024", formOfDelivery: "Email", correspondent: "ТЦ", theme: "Тема документа6", description: "Описание документа6",
-    deadline: "17.04.2024", access: "Нет", control: "Да", file: "path/to/file6"
-  },
-  {
-    /*id: 23,*/ numberReg: "SAQ250189", dateReg: "22.04.2024", numberDoc: "PLP742369", dateDoc: "24.04.2024", formOfDelivery: "Курьер", correspondent: "ЦБ", theme: "Тема документа7", description: "Описание документа7",
-    deadline: "28.09.2024", access: "Да", control: "Нет", file: "path/to/file7"
-  },
-  {
-    /*id: 24,*/ numberReg: "NMQ712573", dateReg: "13.03.2024", numberDoc: "KJI458963", dateDoc: "15.03.2024", formOfDelivery: "Email", correspondent: "ТЦ", theme: "Тема документа6", description: "Описание документа6",
-    deadline: "17.04.2024", access: "Нет", control: "Да", file: "path/to/file6"
-  },
-  {
-    /*id: 25,*/ numberReg: "SAQ250189", dateReg: "22.04.2024", numberDoc: "PLP742369", dateDoc: "24.04.2024", formOfDelivery: "Курьер", correspondent: "ЦБ", theme: "Тема документа7", description: "Описание документа7",
-    deadline: "28.09.2024", access: "Да", control: "Нет", file: "path/to/file7"
-  },
-  {
-    /*id: 26,*/ numberReg: "JOO017845", dateReg: "01.07.2024", numberDoc: "BNO963258", dateDoc: "05.07.2024", formOfDelivery: "Курьер", correspondent: "ГНИ", theme: "Тема документа4", description: "Описание документа4",
-    deadline: "11.08.2024", access: "Да", control: "Нет", file: "path/to/file4"
-  },
-  {
-    /*id: 27,*/ numberReg: "FER965201", dateReg: "15.09.2024", numberDoc: "CVS753951", dateDoc: "17.09.2024", formOfDelivery: "Телефонограмма", correspondent: "ГНИ", theme: "Тема документа5", description: "Описание документа5",
-    deadline: "07.10.2024", access: "Да", control: "Да", file: "path/to/file5"
-  },
-  {
-    /*id: 28,*/ numberReg: "NMQ712573", dateReg: "13.03.2024", numberDoc: "KJI458963", dateDoc: "15.03.2024", formOfDelivery: "Email", correspondent: "ТЦ", theme: "Тема документа6", description: "Описание документа6",
-    deadline: "17.04.2024", access: "Нет", control: "Да", file: "path/to/file6"
-  },
-  {
-    /*id: 29,*/ numberReg: "SAQ250189", dateReg: "22.04.2024", numberDoc: "PLP742369", dateDoc: "24.04.2024", formOfDelivery: "Курьер", correspondent: "ЦБ", theme: "Тема документа7", description: "Описание документа7",
-    deadline: "28.09.2024", access: "Да", control: "Нет", file: "path/to/file7"
-  },
-  {
-    /*id: 30,*/ numberReg: "NMQ712573", dateReg: "13.03.2024", numberDoc: "KJI458963", dateDoc: "15.03.2024", formOfDelivery: "Email", correspondent: "ТЦ", theme: "Тема документа6", description: "Описание документа6",
-    deadline: "17.04.2024", access: "Нет", control: "Да", file: "path/to/file6"
-  },
-
-];
 
 @Component({
   selector: 'app-read',
@@ -161,22 +23,22 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ReadComponent implements AfterViewInit {
   selectedRow: PeriodicElement;
   private _liveAnnouncer = inject(LiveAnnouncer);
+  private dataService = inject(DataService);
 
   displayedColumns: string[] = [/*'id',*/ 'numberReg', 'dateReg', 'numberDoc', 'dateDoc', 'formOfDelivery', 'correspondent', 'theme', 'description', 'deadline', 'access', 'control', 'file', /*'actions'*/];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<PeriodicElement>();
   pageSize = 5;
   currentPage = 0;
 
   constructor(private snackBar: MatSnackBar) {
 
-    // this.selectedRow = this.dataService.getSelectedRow();
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort)
   sort: MatSort = new MatSort;
 
-  ngAfterViewInit() {
+  /*ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.paginator.length = ELEMENT_DATA.length;
@@ -184,6 +46,26 @@ export class ReadComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }*/
+
+  ngAfterViewInit() {
+    this.dataService.getData().subscribe(data => {
+      this.dataSource.data = data; // Загружаем данные из сервиса
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.paginator.length = data.length;
+
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    },
+      error => {
+        console.error('Ошибка при заргузке данных:', error);
+        this.snackBar.open('Не удалось загрузить данные', 'Закрыть', {
+          duration: 3000,
+        })
+      }
+    );
   }
 
   announceSortChange(sortState: Sort) {
@@ -206,7 +88,7 @@ export class ReadComponent implements AfterViewInit {
   loadData() {
     this.currentPage++;
     const startIndex = this.currentPage * this.pageSize;
-    const newData = ELEMENT_DATA.slice(startIndex, startIndex + this.pageSize);
+    const newData = this.dataSource.data.slice(startIndex, startIndex + this.pageSize);
     this.dataSource.data = [...this.dataSource.data, ...newData];
   }
   selectedRowIndex: number | null = null;
@@ -239,11 +121,19 @@ export class ReadComponent implements AfterViewInit {
   }
   selectRow(index: number): void {
     this.selectedRowIndex = index; // Установить индекс выбранной строки
+    const selectedRowData = this.dataSource.data[index];
+
+    // Создание нового объекта для сохранения в localStorage
+    const storageData = {
+      ...selectedRowData,
+      access: selectedRowData.access === 'Да' ? '1' : '2',
+      control: selectedRowData.control === 'Да' ? '1' : '2',
+    };
+
+    localStorage.setItem('selectedRow', JSON.stringify(storageData)); // Сохранить данные в localStorage
   }
 
   deleteElement() {
-    //alert("Вы уверены что хотите удалить данные?");
-
     this.snackBar.open('Вы действительно хотите удалить данные?', 'Да', {
       duration: 3000,
     });
@@ -258,5 +148,9 @@ export class ReadComponent implements AfterViewInit {
 
   isSelected(row: PeriodicElement): boolean {
     return this.selectedRowIndex === this.dataSource.data.indexOf(row);
+  }
+  editItem(element: PeriodicElement): void {
+    localStorage.setItem("selectedUser", JSON.stringify(element));
+    //console.log(element)
   }
 }
