@@ -7,13 +7,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { PeriodicElement } from '../element.model';
 import { isPlatformBrowser } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 
-/*export interface MyDocument {
+export interface MyDocument {
+  id: number,
   numberReg: string,
   dateReg: string,
   numberDoc: string,
-  dataDoc: string,
+  dateDoc: string,
   formOfDelivery: string,
   correspondent: string,
   theme: string,
@@ -21,8 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
   deadline: Date,
   access: string,
   control: string,
-  myfile: string,
-};*/
+  file: string,
+};
 
 interface Option {
   value: string,
@@ -43,7 +45,9 @@ interface Item {
     MatIconModule,
     MatGridListModule,
     MatRadioModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
   templateUrl: './edit.component.html',
   styleUrl: '../edit/edit.component.css'
 })
@@ -53,8 +57,11 @@ export class EditComponent implements OnInit {
   selectedRow: PeriodicElement;
   documentForm: FormGroup;
   selectedRowIndex: number = 0;
+  myDocument: MyDocument[] = [];
 
-  constructor(private fb: FormBuilder, @Inject(PLATFORM_ID) private platformId: Object) {
+  //documents: MyDocument[] = [];
+
+  constructor(private fb: FormBuilder, @Inject(PLATFORM_ID) private platformId: Object, private http: HttpClient,) {
     this.documentForm = this.fb.group({
       numberReg: [''],
       dateReg: [''],
@@ -125,15 +132,21 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userData = localStorage.getItem("selectedRow");
-    if (userData) {
-      const user = JSON.parse(userData);
-      this.documentForm.patchValue(user); // Заполняем форму данными
-      this.selectedRowIndex = this.items.findIndex(item => item.value === user.value);
-    } else {
-      console.log("Данные не найдены, значения null")
-    }
-
+    //localStorage.setItem("selectedRow", JSON.stringify(this.selectedRowIndex));
+    /*if (isPlatformBrowser(this.platformId)) {
+      const userData = localStorage.getItem("selectedRow");
+      if (userData) {
+        const user = JSON.parse(userData);
+        this.documentForm.patchValue(user); // Заполняем форму данными
+        this.selectedRowIndex = this.items.findIndex(item => item.value === user.value);
+        //this.selectedRow = this.items[this.selectedRowIndex];
+        this.loadRowData();
+      } else {
+        console.log("Данные не найдены, значения null");
+      }
+    }*/
+    this.loadFromLocalStorage();
+    //console.log(this.loadDocuments());
   }
 
   handleChange(event: Event) {
@@ -164,25 +177,70 @@ export class EditComponent implements OnInit {
 
   previousRow() {
     if (this.selectedRowIndex > 0) {
-      alert(this.selectedRowIndex)
+      console.log(this.selectedRowIndex)
       this.selectedRowIndex--;
       this.loadRowData();
     }
   }
   nextRow() {
     console.log('След строка', this.selectedRowIndex)
-    alert(this.selectedRowIndex)
-    if (this.selectedRowIndex !== null && this.selectedRowIndex < (this.items.length - 1)) {
+    //alert(this.selectedRowIndex)
+    if (this.selectedRowIndex < this.myDocument.length - 1) {
       this.selectedRowIndex++;
       this.loadRowData();
     }
   }
 
-  loadRowData() {
-    if (this.selectedRowIndex !== null) {
-      alert(this.selectedRowIndex)
-      const currentRow = this.items[this.selectedRowIndex]; // Используйте items или другой источник данных
+  /*loadDocuments() {
+    this.http.get<MyDocument[]>('./assets/data.json').subscribe(data => {
+      this.myDocument = data;
+      console.log(this.myDocument)
+      this.loadRowData();
+    });
+  }*/
+  /*loadFromLocalStorage() {
+    const storedData = localStorage.getItem('documents');
+    if (storedData) {
+      this.myDocument = JSON.parse(storedData);
+      this.loadRowData(); // Загружаем данные для первой строки
+    } else {
+      console.log('Нет данных в localStorage');
+    }
+  }*/
+
+  loadFromLocalStorage() {
+    const storedData = localStorage.getItem('documents');
+    const selectedRowData = localStorage.getItem('selectedRow');
+
+    if (storedData) {
+      this.myDocument = JSON.parse(storedData);
+
+      if (selectedRowData) {
+        const selectedDocument = JSON.parse(selectedRowData);
+        this.selectedRowIndex = this.myDocument.findIndex(doc => doc.id === selectedDocument.id);
+
+        // Загружаем данные для текущей строки
+        this.loadRowData();
+      } else {
+        console.warn('Нет выбранной строки в localStorage');
+      }
+    } else {
+      console.warn('Нет данных в localStorage');
+    }
+  }
+
+  /*loadRowData() {
+    if (this.selectedRowIndex >= 0 && this.selectedRowIndex < this.myDocument.length) {
+      const currentRow = this.myDocument[this.selectedRowIndex];
       this.documentForm.patchValue(currentRow);
+      console.log('Загруженные данные:', currentRow);
+    }
+  }*/
+  loadRowData() {
+    if (this.selectedRowIndex >= 0 && this.selectedRowIndex < this.myDocument.length) {
+      const currentRow = this.myDocument[this.selectedRowIndex];
+      this.documentForm.patchValue(currentRow); // Заполняем форму текущими данными
+      console.log('Загруженные данные:', currentRow);
     }
   }
 }

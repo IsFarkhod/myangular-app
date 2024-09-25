@@ -103,9 +103,11 @@ export class ReadComponent implements AfterViewInit {
   }
 
   moveUp() {
-    if (this.selectedRowIndex !== null && this.selectedRowIndex > 0) {
-      this.selectedRowIndex--; // Перейти к предыдущей строке
-    } else if (this.selectedRowIndex === null) {
+    if (this.selectedRowIndex !== null) {
+      if (this.selectedRowIndex > 0) {
+        this.selectedRowIndex--;
+      }
+    } else {
       this.selectedRowIndex = 0; // Если ничего не выбрано, выберите первую строку
     }
   }
@@ -113,25 +115,45 @@ export class ReadComponent implements AfterViewInit {
   moveDown() {
     if (this.selectedRowIndex === null) {
       this.selectedRowIndex = 0; // Если ничего не выбрано, выберите первую строку
-    } else if (this.selectedRowIndex < this.dataSource.data.length - 1) {
-      this.selectedRowIndex++; // Перейти к следующей строке
-    } else {
-      this.loadNextPage();
+    } else if (this.selectedRowIndex < this.pageSize - 1) {
+      this.selectedRowIndex++; // Перейти к следующей строке на текущей странице
+    } else if (this.paginator.hasNextPage()) {
+      this.loadNextPage(); // Загружаем следующую страницу, если есть
+      this.selectedRowIndex = 0; // Сбрасываем на первую строку новой страницы
     }
   }
-  selectRow(index: number): void {
-    this.selectedRowIndex = index; // Установить индекс выбранной строки
+  /*selectRow(index: number): void {
+    this.selectedRowIndex = index; // Устанавливаем индекс выбранной строки
     const selectedRowData = this.dataSource.data[index];
-
-    // Создание нового объекта для сохранения в localStorage
-    const storageData = {
+    /*const storageData = {
       ...selectedRowData,
       access: selectedRowData.access === 'Да' ? '1' : '2',
       control: selectedRowData.control === 'Да' ? '1' : '2',
     };
+    // Сохраняем все документы в localStorage
+    localStorage.setItem('documents', JSON.stringify(this.dataSource.data));
 
-    localStorage.setItem('selectedRow', JSON.stringify(storageData)); // Сохранить данные в localStorage
+    // Сохраняем выбранную строку, если нужно
+    localStorage.setItem('selectedRow', JSON.stringify(selectedRowData));
+  }*/
+
+  selectRow(index: number): void {
+    const globalIndex = this.paginator.pageIndex * this.pageSize + index; // Вычисляем глобальный индекс
+    this.selectedRowIndex = index; // Устанавливаем индекс выбранной строки на текущей странице
+
+    if (globalIndex < this.dataSource.data.length) {
+      const selectedRowData = this.dataSource.data[globalIndex];
+      localStorage.setItem('selectedRow', JSON.stringify(selectedRowData));
+      console.log('Выбранная строка:', selectedRowData);
+    }
   }
+
+  isSelected(row: PeriodicElement): boolean {
+    const index = this.dataSource.data.indexOf(row);
+    const localIndex = this.paginator.pageIndex * this.pageSize + (this.selectedRowIndex ?? 0);
+    return index === localIndex;
+  }
+
 
   deleteElement() {
     this.snackBar.open('Вы действительно хотите удалить данные?', 'Да', {
@@ -146,11 +168,11 @@ export class ReadComponent implements AfterViewInit {
     }
   }
 
-  isSelected(row: PeriodicElement): boolean {
-    return this.selectedRowIndex === this.dataSource.data.indexOf(row);
-  }
+  /* isSelected(row: PeriodicElement): boolean {
+     return this.selectedRowIndex === this.dataSource.data.indexOf(row);
+   }*/
   editItem(element: PeriodicElement): void {
-    localStorage.setItem("selectedUser", JSON.stringify(element));
+    localStorage.setItem("selectedRow", JSON.stringify(element));
     //console.log(element)
   }
 }

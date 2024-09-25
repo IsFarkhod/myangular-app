@@ -1,6 +1,7 @@
 [
     {
-        "numberReg": "AFB120987",
+        "id": 1,
+        "numberReg": "RFB120987",
         "dateReg": "18.01.2024",
         "numberDoc": "EDF147852",
         "dateDoc": "21.01.2024",
@@ -14,6 +15,7 @@
         "file": "path/to/file1"
     },
     {
+        "id": 2,
         "numberReg": "TRE456789",
         "dateReg": "16.08.2024",
         "numberDoc": "OFV254789",
@@ -28,6 +30,7 @@
         "file": "path/to/file2"
     },
     {
+        "id": 3,
         "numberReg": "ABE559406",
         "dateReg": "12.05.2024",
         "numberDoc": "RTY012477",
@@ -42,6 +45,7 @@
         "file": "path/to/file3"
     },
     {
+        "id": 4,
         "numberReg": "JOO017845",
         "dateReg": "01.07.2024",
         "numberDoc": "BNO963258",
@@ -56,6 +60,7 @@
         "file": "path/to/file4"
     },
     {
+        "id": 5,
         "numberReg": "FER965201",
         "dateReg": "15.09.2024",
         "numberDoc": "CVS753951",
@@ -70,6 +75,7 @@
         "file": "path/to/file5"
     },
     {
+        "id": 6,
         "numberReg": "NMQ712573",
         "dateReg": "13.03.2024",
         "numberDoc": "KJI458963",
@@ -84,6 +90,7 @@
         "file": "path/to/file6"
     },
     {
+        "id": 7,
         "numberReg": "SAQ250189",
         "dateReg": "22.04.2024",
         "numberDoc": "PLP742369",
@@ -98,6 +105,7 @@
         "file": "path/to/file7"
     },
     {
+        "id": 8,
         "numberReg": "EGR190378",
         "dateReg": "18.01.2024",
         "numberDoc": "EDF147852",
@@ -112,6 +120,7 @@
         "file": "path/to/file1"
     },
     {
+        "id": 9,
         "numberReg": "OFE850147",
         "dateReg": "16.08.2024",
         "numberDoc": "OOP754701",
@@ -126,6 +135,7 @@
         "file": "path/to/file2"
     },
     {
+        "id": 10,
         "numberReg": "OLP559406",
         "dateReg": "12.05.2024",
         "numberDoc": "NGI853075",
@@ -140,6 +150,7 @@
         "file": "path/to/file3"
     },
     {
+        "id": 11,
         "numberReg": "POL401475",
         "dateReg": "02.07.2024",
         "numberDoc": "IGN401258",
@@ -154,6 +165,7 @@
         "file": "path/to/file14"
     },
     {
+        "id": 12,
         "numberReg": "FER965201",
         "dateReg": "15.09.2024",
         "numberDoc": "MNI750251",
@@ -168,6 +180,7 @@
         "file": "path/to/file15"
     },
     {
+        "id": 13,
         "numberReg": "NMQ712573",
         "dateReg": "13.03.2024",
         "numberDoc": "OLI858963",
@@ -182,6 +195,7 @@
         "file": "path/to/file16"
     },
     {
+        "id": 14,
         "numberReg": "EUJ205080",
         "dateReg": "22.04.2024",
         "numberDoc": "PLP742369",
@@ -196,6 +210,7 @@
         "file": "path/to/file7"
     },
     {
+        "id": 15,
         "numberReg": "EGR190378",
         "dateReg": "18.01.2024",
         "numberDoc": "EDF147852",
@@ -210,6 +225,7 @@
         "file": "path/to/file1"
     },
     {
+        "id": 16,
         "numberReg": "OFE850147",
         "dateReg": "16.08.2024",
         "numberDoc": "POL017985",
@@ -224,6 +240,7 @@
         "file": "path/to/file2"
     },
     {
+        "id": 17,
         "numberReg": "EOR185250",
         "dateReg": "20.01.2024",
         "numberDoc": "EDF147852",
@@ -238,6 +255,7 @@
         "file": "path/to/file101"
     },
     {
+        "id": 18,
         "numberReg": "OFE850147",
         "dateReg": "16.08.2024",
         "numberDoc": "OFV254789",
@@ -252,6 +270,7 @@
         "file": "path/to/file72"
     },
     {
+        "id": 19,
         "numberReg": "EGR190378",
         "dateReg": "18.01.2024",
         "numberDoc": "EDF147852",
@@ -266,6 +285,7 @@
         "file": "path/to/file19"
     },
     {
+        "id": 20,
         "numberReg": "OFE850147",
         "dateReg": "16.08.2024",
         "numberDoc": "OFV254789",
@@ -280,6 +300,7 @@
         "file": "path/to/file2"
     },
     {
+        "id": 21,
         "numberReg": "EGR190378",
         "dateReg": "18.01.2024",
         "numberDoc": "EDF147852",
@@ -294,6 +315,7 @@
         "file": "path/to/file1"
     },
     {
+        "id": 22,
         "numberReg": "JKL740152",
         "dateReg": "16.08.2024",
         "numberDoc": "OFV254789",
@@ -308,6 +330,7 @@
         "file": "path/to/file2"
     },
     {
+        "id": 23,
         "numberReg": "THG756841",
         "dateReg": "12.05.2024",
         "numberDoc": "EDF147852",
@@ -322,6 +345,7 @@
         "file": "path/to/file47"
     },
     {
+        "id": 24,
         "numberReg": "IOE857417",
         "dateReg": "06.09.2024",
         "numberDoc": "OIK750142",
@@ -336,6 +360,7 @@
         "file": "path/to/file25"
     },
     {
+        "id": 25,
         "numberReg": "THG756841",
         "dateReg": "12.05.2024",
         "numberDoc": "EDF147852",
@@ -350,6 +375,7 @@
         "file": "path/to/file47"
     },
     {
+        "id": 26,
         "numberReg": "TUE739125",
         "dateReg": "07.09.2024",
         "numberDoc": "PLQ704581",
@@ -364,6 +390,7 @@
         "file": "path/to/file65"
     },
     {
+        "id": 27,
         "numberReg": "QWE795013",
         "dateReg": "12.05.2024",
         "numberDoc": "EDF147852",
@@ -378,6 +405,7 @@
         "file": "path/to/file47"
     },
     {
+        "id": 28,
         "numberReg": "TYZ472536",
         "dateReg": "07.09.2024",
         "numberDoc": "QWE746925",
@@ -392,6 +420,7 @@
         "file": "path/to/file222"
     },
     {
+        "id": 29,
         "numberReg": "ERU785220",
         "dateReg": "12.05.2024",
         "numberDoc": "EDF147852",
@@ -406,6 +435,7 @@
         "file": "path/to/file47"
     },
     {
+        "id": 30,
         "numberReg": "YYI963250",
         "dateReg": "07.09.2024",
         "numberDoc": "QWE148506",

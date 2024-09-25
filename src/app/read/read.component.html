@@ -125,7 +125,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [class.selected]="isSelected(row)"
-      (click)="selectRow(i)">
+      (click)="selectRow(dataSource.data.indexOf(row))">
     </tr>
   </table>
 

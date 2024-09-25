@@ -9,10 +9,10 @@
 <section class="add-doc">
     <div class="paginator-buttons">
         <button class="btn-previous" (click)="previousRow()" [disabled]="selectedRowIndex === 0">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
         </button>
         <button class="btn-next" (click)="nextRow()" [disabled]="selectedRowIndex === (documentForm.value.length - 1)">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="telegram"></mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_forward"></mat-icon>
         </button>
     </div>
     <form class="add-form" [formGroup]="documentForm">
@@ -138,8 +138,8 @@
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-radio-group aria-label="Доступ" formControlName="access">
-                    <mat-radio-button value="1" id="access-y">Да</mat-radio-button>
-                    <mat-radio-button value="2" id="access-n">Нет</mat-radio-button>
+                    <mat-radio-button value="Да" id="access-y">Да</mat-radio-button>
+                    <mat-radio-button value="Нет" id="access-n">Нет</mat-radio-button>
                 </mat-radio-group>
             </mat-grid-tile>
             <mat-grid-tile>
@@ -149,8 +149,8 @@
             </mat-grid-tile>
             <mat-grid-tile>
                 <mat-radio-group aria-label="Контроль" id="control" formControlName="control">
-                    <mat-radio-button value="1" id="control-y">Да</mat-radio-button>
-                    <mat-radio-button value="2" id="control-n">Нет</mat-radio-button>
+                    <mat-radio-button value="Да" id="control-y">Да</mat-radio-button>
+                    <mat-radio-button value="Нет" id="control-n">Нет</mat-radio-button>
                 </mat-radio-group>
             </mat-grid-tile>
         </mat-grid-list>
