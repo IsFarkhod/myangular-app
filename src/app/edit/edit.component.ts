@@ -228,7 +228,8 @@ export class EditComponent implements OnInit {
       console.warn('Нет данных в localStorage');
     }
 
-    console.log("Данные  " + storedData)
+    console.log("Данные  " + storedData);
+    console.log("Selected row" + selectedRowData);
   }
 
   /*loadRowData() {
