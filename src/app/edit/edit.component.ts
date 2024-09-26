@@ -212,8 +212,8 @@ export class EditComponent implements OnInit {
     const storedData = localStorage.getItem('documents');
     const selectedRowData = localStorage.getItem('selectedRow');
 
-    if (storedData) {
-      this.myDocument = JSON.parse(storedData);
+    if (selectedRowData) {
+      //this.myDocument = JSON.parse(storedData);
 
       if (selectedRowData) {
         const selectedDocument = JSON.parse(selectedRowData);
