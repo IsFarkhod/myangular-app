@@ -172,6 +172,10 @@ export class EditComponent implements OnInit {
   onSubmit() {
     if (this.documentForm.valid) {
       console.log(this.documentForm.value);
+      const documentData = this.documentForm.value;
+      localStorage.setItem('documents', JSON.stringify(this.myDocument));
+      localStorage.setItem('selectedRow', JSON.stringify(this.selectedRow));
+      console.log('Данные сохранены в localStorage:', documentData);
     }
   }
 
@@ -212,8 +216,8 @@ export class EditComponent implements OnInit {
     const storedData = localStorage.getItem('documents');
     const selectedRowData = localStorage.getItem('selectedRow');
 
-    if (selectedRowData) {
-      //this.myDocument = JSON.parse(storedData);
+    if (storedData) {
+      this.myDocument = JSON.parse(storedData);
 
       if (selectedRowData) {
         const selectedDocument = JSON.parse(selectedRowData);
@@ -228,8 +232,7 @@ export class EditComponent implements OnInit {
       console.warn('Нет данных в localStorage');
     }
 
-    console.log("Данные  " + storedData);
-    console.log("Selected row" + selectedRowData);
+
   }
 
   /*loadRowData() {
