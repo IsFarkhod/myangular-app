@@ -170,11 +170,18 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.documentForm.valid) {
+    /*if (this.documentForm.valid) {
       console.log(this.documentForm.value);
       const documentData = this.documentForm.value;
       localStorage.setItem('documents', JSON.stringify(this.myDocument));
       localStorage.setItem('selectedRow', JSON.stringify(this.selectedRow));
+      console.log('Данные сохранены в localStorage:', documentData);
+    }*/
+    if (this.documentForm.valid) {
+      const documentData = this.documentForm.value;
+      this.myDocument.push(documentData); // Добавляем новый документ в массив
+      localStorage.setItem('documents', JSON.stringify(this.myDocument)); // Сохраняем массив документов
+      localStorage.setItem('selectedRow', JSON.stringify(this.selectedRow)); // Сохраняем выбранную строку
       console.log('Данные сохранены в localStorage:', documentData);
     }
   }
