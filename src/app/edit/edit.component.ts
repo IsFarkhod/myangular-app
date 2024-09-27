@@ -131,7 +131,7 @@ export class EditComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     //localStorage.setItem("selectedRow", JSON.stringify(this.selectedRowIndex));
     /*if (isPlatformBrowser(this.platformId)) {
       const userData = localStorage.getItem("selectedRow");
@@ -144,11 +144,27 @@ export class EditComponent implements OnInit {
       } else {
         console.log("Данные не найдены, значения null");
       }
-    }*/
+    }
     this.loadFromLocalStorage();
     //console.log(this.loadDocuments());
+  }*/
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadFromLocalStorage();
+    }
   }
 
+  loadFromLocalStorage() {
+    const selectedRowData = localStorage.getItem('selectedRow');
+
+    if (selectedRowData) {
+      const selectedDocument = JSON.parse(selectedRowData);
+      this.documentForm.patchValue(selectedDocument); // Заполняем форму данными
+      console.log('Загруженные данные для формы:', selectedDocument);
+    } else {
+      console.warn('Нет выбранной строки в localStorage');
+    }
+  }
   handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
     if (this.selectedRow) {
@@ -240,33 +256,7 @@ export class EditComponent implements OnInit {
     }
   }*/
 
-  loadFromLocalStorage() {
-    const storedData = localStorage.getItem('documents');
-    const selectedRowData = localStorage.getItem('selectedRow');
 
-    console.log('Содержимое localStorage для documents:', storedData);
-    console.log('Содержимое localStorage для selectedRow:', selectedRowData);
-
-    if (storedData) {
-      this.myDocument = JSON.parse(storedData);
-    } else {
-      console.warn('Нет данных в localStorage для documents');
-      this.myDocument = []; // или любой другой подходящий fallback
-    }
-
-    if (selectedRowData) {
-      const selectedDocument = JSON.parse(selectedRowData);
-      this.selectedRowIndex = this.myDocument.findIndex(doc => doc.id === selectedDocument.id);
-
-      if (this.selectedRowIndex !== -1) {
-        this.loadRowData(); // Загружаем данные для текущей строки
-      } else {
-        console.warn('Выбранный документ не найден в загруженных данных');
-      }
-    } else {
-      console.warn('Нет выбранной строки в localStorage');
-    }
-  }
 
   /*loadRowData() {
     if (this.selectedRowIndex >= 0 && this.selectedRowIndex < this.myDocument.length) {
