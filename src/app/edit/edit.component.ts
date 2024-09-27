@@ -212,10 +212,10 @@ export class EditComponent implements OnInit {
     }
   }*/
 
-  loadFromLocalStorage() {
+  /*loadFromLocalStorage() {
     const storedData = localStorage.getItem('documents');
     const selectedRowData = localStorage.getItem('selectedRow');
-
+    console.log("Stored Data" + storedData);
     if (storedData) {
       this.myDocument = JSON.parse(storedData);
 
@@ -231,8 +231,34 @@ export class EditComponent implements OnInit {
     } else {
       console.warn('Нет данных в localStorage');
     }
+  }*/
 
+  loadFromLocalStorage() {
+    const storedData = localStorage.getItem('documents');
+    const selectedRowData = localStorage.getItem('selectedRow');
 
+    console.log('Содержимое localStorage для documents:', storedData);
+    console.log('Содержимое localStorage для selectedRow:', selectedRowData);
+
+    if (storedData) {
+      this.myDocument = JSON.parse(storedData);
+    } else {
+      console.warn('Нет данных в localStorage для documents');
+      this.myDocument = []; // или любой другой подходящий fallback
+    }
+
+    if (selectedRowData) {
+      const selectedDocument = JSON.parse(selectedRowData);
+      this.selectedRowIndex = this.myDocument.findIndex(doc => doc.id === selectedDocument.id);
+
+      if (this.selectedRowIndex !== -1) {
+        this.loadRowData(); // Загружаем данные для текущей строки
+      } else {
+        console.warn('Выбранный документ не найден в загруженных данных');
+      }
+    } else {
+      console.warn('Нет выбранной строки в localStorage');
+    }
   }
 
   /*loadRowData() {
