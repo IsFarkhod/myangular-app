@@ -202,7 +202,7 @@ export class EditComponent implements OnInit {
     }
   }
 
-  previousRow() {
+  /*previousRow() {
     if (this.selectedRowIndex > 0) {
       console.log(this.selectedRowIndex)
       this.selectedRowIndex--;
@@ -215,6 +215,34 @@ export class EditComponent implements OnInit {
     if (this.selectedRowIndex < this.myDocument.length - 1) {
       this.selectedRowIndex++;
       this.loadRowData();
+    }
+  }*/
+
+  previousRow() {
+    if (this.myDocument.length === 0) {
+      console.warn('Список документов пуст');
+      return;
+    }
+
+    if (this.selectedRowIndex > 0) {
+      this.selectedRowIndex--;
+      this.loadRowData();
+    } else {
+      console.warn('Вы находитесь на первой строке');
+    }
+  }
+
+  nextRow() {
+    if (this.myDocument.length === 0) {
+      console.warn('Список документов пуст');
+      return;
+    }
+
+    if (this.selectedRowIndex < this.myDocument.length - 1) {
+      this.selectedRowIndex++;
+      this.loadRowData();
+    } else {
+      console.warn('Вы находитесь на последней строке');
     }
   }
 
