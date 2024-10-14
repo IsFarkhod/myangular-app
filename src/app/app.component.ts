@@ -27,7 +27,8 @@ interface Item {
     MatGridListModule,
     MatRadioModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+
 })
 export class AppComponent {
   //options = ["Курьер", "Email", "Телефонограмма"];

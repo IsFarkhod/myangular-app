@@ -154,7 +154,7 @@ export class EditComponent implements OnInit {
     }
   }
 
-  loadFromLocalStorage() {
+  /*loadFromLocalStorage() {
     const selectedRowData = localStorage.getItem('selectedRow');
 
     if (selectedRowData) {
@@ -164,7 +164,7 @@ export class EditComponent implements OnInit {
     } else {
       console.warn('Нет выбранной строки в localStorage');
     }
-  }
+  }*/
   handleChange(event: Event) {
     const target = event.target as HTMLInputElement;
     if (this.selectedRow) {
@@ -186,23 +186,23 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit() {
-    /*if (this.documentForm.valid) {
+    if (this.documentForm.valid) {
       console.log(this.documentForm.value);
       const documentData = this.documentForm.value;
       localStorage.setItem('documents', JSON.stringify(this.myDocument));
       localStorage.setItem('selectedRow', JSON.stringify(this.selectedRow));
       console.log('Данные сохранены в localStorage:', documentData);
-    }*/
-    if (this.documentForm.valid) {
-      const documentData = this.documentForm.value;
-      this.myDocument.push(documentData); // Добавляем новый документ в массив
-      localStorage.setItem('documents', JSON.stringify(this.myDocument)); // Сохраняем массив документов
-      localStorage.setItem('selectedRow', JSON.stringify(this.selectedRow)); // Сохраняем выбранную строку
-      console.log('Данные сохранены в localStorage:', documentData);
     }
+    /* if (this.documentForm.valid) {
+       const documentData = this.documentForm.value;
+       this.myDocument.push(documentData); // Добавляем новый документ в массив
+       localStorage.setItem('documents', JSON.stringify(this.myDocument)); // Сохраняем массив документов
+       localStorage.setItem('selectedRow', JSON.stringify(this.selectedRow)); // Сохраняем выбранную строку
+       console.log('Данные сохранены в localStorage:', documentData);
+     }*/
   }
 
-  /*previousRow() {
+  previousRow() {
     if (this.selectedRowIndex > 0) {
       console.log(this.selectedRowIndex)
       this.selectedRowIndex--;
@@ -216,35 +216,8 @@ export class EditComponent implements OnInit {
       this.selectedRowIndex++;
       this.loadRowData();
     }
-  }*/
-
-  previousRow() {
-    if (this.myDocument.length === 0) {
-      console.warn('Список документов пуст');
-      return;
-    }
-
-    if (this.selectedRowIndex > 0) {
-      this.selectedRowIndex--;
-      this.loadRowData();
-    } else {
-      console.warn('Вы находитесь на первой строке');
-    }
   }
 
-  nextRow() {
-    if (this.myDocument.length === 0) {
-      console.warn('Список документов пуст');
-      return;
-    }
-
-    if (this.selectedRowIndex < this.myDocument.length - 1) {
-      this.selectedRowIndex++;
-      this.loadRowData();
-    } else {
-      console.warn('Вы находитесь на последней строке');
-    }
-  }
 
   /*loadDocuments() {
     this.http.get<MyDocument[]>('./assets/data.json').subscribe(data => {
@@ -253,7 +226,7 @@ export class EditComponent implements OnInit {
       this.loadRowData();
     });
   }*/
-  /*loadFromLocalStorage() {
+  loadFromLocalStorage() {
     const storedData = localStorage.getItem('documents');
     if (storedData) {
       this.myDocument = JSON.parse(storedData);
@@ -261,7 +234,7 @@ export class EditComponent implements OnInit {
     } else {
       console.log('Нет данных в localStorage');
     }
-  }*/
+  }
 
   /*loadFromLocalStorage() {
     const storedData = localStorage.getItem('documents');

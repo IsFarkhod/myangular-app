@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 import { PeriodicElement } from '../element.model';
 import { DataService } from '../../data.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { DiagramComponent } from '../diagram/diagram.component';
 
 @Component({
   selector: 'app-read',
   standalone: true,
-  imports: [MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule],
+  imports: [MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule, DiagramComponent],
   templateUrl: './read.component.html',
   styleUrl: './read.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -78,7 +78,6 @@ export class ReadComponent implements AfterViewInit {
   toggleDeleteButton(element: PeriodicElement): void {
     element.showDelete = !element.showDelete; // Переключить видимость кнопки
   }
-
   deleteItem(element: PeriodicElement): void {
     // Logic to delete the item from the data source
     console.log('Deleting item:', element);
@@ -101,7 +100,6 @@ export class ReadComponent implements AfterViewInit {
       this.moveDown();
     }
   }
-
   moveUp() {
     if (this.selectedRowIndex !== null) {
       if (this.selectedRowIndex > 0) {
@@ -153,7 +151,6 @@ export class ReadComponent implements AfterViewInit {
     const localIndex = this.paginator.pageIndex * this.pageSize + (this.selectedRowIndex ?? 0);
     return index === localIndex;
   }
-
 
   deleteElement() {
     this.snackBar.open('Вы действительно хотите удалить данные?', 'Да', {
