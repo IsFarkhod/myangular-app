@@ -60,7 +60,7 @@ export class ReadComponent implements AfterViewInit {
       }
     },
       error => {
-        console.error('Ошибка при заргузке данных:', error);
+        console.error('Ошибка при заргузке данных:', error.message || error);
         this.snackBar.open('Не удалось загрузить данные', 'Закрыть', {
           duration: 3000,
         })
