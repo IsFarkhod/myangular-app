@@ -30,7 +30,7 @@ export class ReadComponent implements AfterViewInit {
   pageSize = 5;
   currentPage = 0;
 
-  constructor(private snackBar: MatSnackBar) {
+  constructor(private snackBar: MatSnackBar, private dataServices: DataService) {
 
   }
 
@@ -49,7 +49,7 @@ export class ReadComponent implements AfterViewInit {
   }*/
 
   ngAfterViewInit() {
-    this.dataService.getData().subscribe(data => {
+    this.dataServices.getData().subscribe(data => {
       this.dataSource.data = data; // Загружаем данные из сервиса
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
