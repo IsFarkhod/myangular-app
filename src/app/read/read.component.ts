@@ -11,11 +11,14 @@ import { PeriodicElement } from '../element.model';
 import { DataService } from '../../data.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DiagramComponent } from '../diagram/diagram.component';
+/*import { Firestore, provideFirestore, getFirestore, collection, getDocs } from '@angular/fire/firestore';
+import { environment } from '../../environment';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app'*/
 
 @Component({
   selector: 'app-read',
   standalone: true,
-  imports: [MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule, DiagramComponent],
+  imports: [MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule, DiagramComponent,],
   templateUrl: './read.component.html',
   styleUrl: './read.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +33,7 @@ export class ReadComponent implements AfterViewInit {
   pageSize = 5;
   currentPage = 0;
 
-  constructor(private snackBar: MatSnackBar, private dataServices: DataService) {
+  constructor(private snackBar: MatSnackBar) {
 
   }
 
@@ -49,11 +52,12 @@ export class ReadComponent implements AfterViewInit {
   }*/
 
   ngAfterViewInit() {
-    this.dataServices.getData().subscribe(data => {
+    this.dataService.getData().subscribe(data => {
       this.dataSource.data = data; // Загружаем данные из сервиса
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.paginator.length = data.length;
+      localStorage.setItem('documents', JSON.stringify(data));
 
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();

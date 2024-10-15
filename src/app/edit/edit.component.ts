@@ -218,7 +218,6 @@ export class EditComponent implements OnInit {
     }
   }
 
-
   /*loadDocuments() {
     this.http.get<MyDocument[]>('./assets/data.json').subscribe(data => {
       this.myDocument = data;
@@ -226,7 +225,7 @@ export class EditComponent implements OnInit {
       this.loadRowData();
     });
   }*/
-  loadFromLocalStorage() {
+  /*loadFromLocalStorage() {
     const storedData = localStorage.getItem('documents');
     if (storedData) {
       this.myDocument = JSON.parse(storedData);
@@ -234,9 +233,9 @@ export class EditComponent implements OnInit {
     } else {
       console.log('Нет данных в localStorage');
     }
-  }
+  }*/
 
-  /*loadFromLocalStorage() {
+  loadFromLocalStorage() {
     const storedData = localStorage.getItem('documents');
     const selectedRowData = localStorage.getItem('selectedRow');
     console.log("Stored Data" + storedData);
@@ -255,22 +254,22 @@ export class EditComponent implements OnInit {
     } else {
       console.warn('Нет данных в localStorage');
     }
-  }*/
+  }
 
 
 
-  /*loadRowData() {
+  loadRowData() {
     if (this.selectedRowIndex >= 0 && this.selectedRowIndex < this.myDocument.length) {
       const currentRow = this.myDocument[this.selectedRowIndex];
       this.documentForm.patchValue(currentRow);
       console.log('Загруженные данные:', currentRow);
     }
-  }*/
-  loadRowData() {
+  }
+  /*loadRowData() {
     if (this.selectedRowIndex >= 0 && this.selectedRowIndex < this.myDocument.length) {
       const currentRow = this.myDocument[this.selectedRowIndex];
       this.documentForm.patchValue(currentRow); // Заполняем форму текущими данными
       console.log('Загруженные данные:', currentRow);
     }
-  }
+  }*/
 }
