@@ -58,7 +58,14 @@ export class ReadComponent implements AfterViewInit {
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();
       }
-    });
+    },
+      error => {
+        console.error('Ошибка при заргузке данных:', error.message || error);
+        this.snackBar.open('Не удалось загрузить данные', 'Закрыть', {
+          duration: 3000,
+        })
+      }
+    );
   }
 
   announceSortChange(sortState: Sort) {
